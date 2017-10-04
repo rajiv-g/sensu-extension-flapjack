@@ -32,20 +32,11 @@ describe "Sensu::Extensions::Flapjack specs" do
     expect(@extension.name).to eq(@extension_name)
   end
 
-  it "should return description" do
-    expect(@extension.description).to eq(@extension_description)
-  end
-
-  it "#create_config raise error if no configuration is specified" do
-    @extension.stub(:settings) { Hash.new }
-    expect { @extension.post_init }.to raise_error(ArgumentError)
-  end
-
   it "should return config hash with settings merged" do
     settings = { @extension_name => { host: 'flapjack.host', port: 8888 } }
     result = @default_config.merge(settings[@extension_name])
     @extension.stub(:settings) { settings }
-    expect(@extension.create_config(@extension_name, @default_config)).to eq(result)
+    expect(@extension.@options.to eq(result)
   end
 
   it 'should return definition' do
